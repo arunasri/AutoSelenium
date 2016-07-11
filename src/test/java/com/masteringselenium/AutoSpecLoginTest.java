@@ -33,7 +33,7 @@ public class AutoSpecLoginTest {
     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).clear();
     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).sendKeys("subbarao.pasupuleti@gmail.com");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("welcome123");
+    driver.findElement(By.id("password")).sendKeys("welcome12");
     driver.findElement(By.xpath("(//button[@type='submit'])[7]")).click();
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.ellipsisSpan.ng-binding")));
     driver.findElement(By.cssSelector("span.ellipsisSpan.ng-binding")).click();
