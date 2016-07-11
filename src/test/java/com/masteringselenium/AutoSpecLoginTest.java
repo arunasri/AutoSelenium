@@ -21,24 +21,34 @@ public class AutoSpecLoginTest {
     driver = new ChromeDriver();
     baseUrl = "http://159.203.125.57:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.get(baseUrl + "/AutoSpecs/login");
   }
 
   @Test
   public void testAutoSpecLogin() throws Exception {
-    driver.get(baseUrl + "/AutoSpecs/login");
-
     WebDriverWait wait = new WebDriverWait(driver, 15);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.form-group.pypeFormGroup > #email")));
-
     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).clear();
     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).sendKeys("subbarao.pasupuleti@gmail.com");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("welcome12");
+    driver.findElement(By.id("password")).sendKeys("welcome123");
     driver.findElement(By.xpath("(//button[@type='submit'])[7]")).click();
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.ellipsisSpan.ng-binding")));
     driver.findElement(By.cssSelector("span.ellipsisSpan.ng-binding")).click();
     driver.findElement(By.linkText("Logout")).click();
   }
+
+  @Test
+   public void testInvaid() throws Exception {
+     WebDriverWait wait = new WebDriverWait(driver, 15);
+     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.form-group.pypeFormGroup > #email")));
+     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).clear();
+     driver.findElement(By.cssSelector("div.form-group.pypeFormGroup > #email")).sendKeys("subbarao.pasupuleti@gmail.com");
+     driver.findElement(By.id("password")).clear();
+     driver.findElement(By.id("password")).sendKeys("adfajdfk");
+     driver.findElement(By.xpath("(//button[@type='submit'])[7]")).click();
+     assertTrue(driver.findElement(By.cssSelector(".alert.flashStyle ")).getText().startsWith("Email or password is incorrect"));
+   }
 
   @AfterClass(alwaysRun = true)
   public void tearDown() throws Exception {
