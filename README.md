@@ -1,3 +1,3 @@
 #Running tests
-bundle install
-bundle exec guard
+* bundle install
+* bundle exec guard
