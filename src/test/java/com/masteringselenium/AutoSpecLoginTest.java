@@ -90,5 +90,6 @@ public class AutoSpecLoginTest {
     } finally {
       acceptNextAlert = true;
     }
+
   }
 }
