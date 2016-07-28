@@ -1,24 +1,41 @@
 package com.masteringselenium;
 
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import static org.testng.Assert.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class AutoSpecLoginTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-
+  public static final String USERNAME = "waitforvisible";
+  public static final String ACCESS_KEY =  System.getProperty("ACCESS_KEY");
+  public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+ 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
-    driver = new ChromeDriver();
+    DesiredCapabilities caps = DesiredCapabilities.chrome();
+    caps.setCapability("platform", "Windows XP");
+    caps.setCapability("version", "43.0");
+ 
+    driver = new RemoteWebDriver(new URL(URL), caps);
+ 
     baseUrl = "http://159.203.125.57:8080/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get(baseUrl + "/AutoSpecs/login");
