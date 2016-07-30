@@ -36,7 +36,7 @@ public class AutoSpecLoginTest {
  
     driver = new RemoteWebDriver(new URL(URL), caps);
  
-    baseUrl = "http://159.203.125.57:8080/";
+    baseUrl = "http://autospecs.pype.io/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get(baseUrl + "/AutoSpecs/login");
   }
